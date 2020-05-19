@@ -8,6 +8,8 @@ services:
       - "5000:5432"
     volumes:
       - ./init_db_data.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
 
   data-service:
     restart: always
@@ -20,5 +22,3 @@ services:
       - DB_URL=jdbc:postgresql://db:5432/postgres
       - DB_USER=postgres
       - DB_PASSWORD=
-#    env_file:
-#      - .env
