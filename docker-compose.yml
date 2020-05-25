@@ -11,14 +11,23 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
 
+  rabbitmq:
+    image: rabbitmq:3.8.3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   data-service:
     restart: always
-    image: tomassukenik/react-app:hateoas-service-0.0.1
+    image: tomassukenik/react-app:hateoas-service-0.1.0
     ports:
       - "9000:8081"
     depends_on:
       - db
+      - rabbitmq
     environment:
       - DB_URL=jdbc:postgresql://db:5432/postgres
       - DB_USER=postgres
       - DB_PASSWORD=postgres
+      - MSG_BROKER_HOST=rabbitmq
+      - MSG_QUEUE_NAME=heroDetailQueue
