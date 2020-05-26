@@ -19,7 +19,7 @@ services:
 
   data-service:
     restart: always
-    image: tomassukenik/react-app:hateoas-service-0.1.0
+    image: tomassukenik/react-app:hateoas-service-0.1.1
     ports:
       - "9000:8081"
     depends_on:
