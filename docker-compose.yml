@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   db:
@@ -20,8 +20,6 @@ services:
   data-service:
     restart: always
     image: tomassukenik/react-app:hateoas-service-0.1.1
-    ports:
-      - "9000:8081"
     depends_on:
       - db
       - rabbitmq
@@ -35,7 +33,6 @@ services:
     restart: always
     image: tomassukenik/react-app:frontend-1.0
     ports:
-      - "80:80"
-    depends_on: 
+      - "3000:80"
+    depends_on:
       - data-service
-
