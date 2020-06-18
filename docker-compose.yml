@@ -1,6 +1,17 @@
 version: "2"
 
 services:
+  reverse-proxy:
+    image: nginx:1.17.10
+    container_name: reverse_proxy
+    depends_on:
+      - frontend
+      - data-service
+    volumes:
+      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
   db:
     restart: always
     image: postgres:12.3
@@ -31,8 +42,6 @@ services:
       - MSG_QUEUE_NAME=heroDetailQueue
   frontend:
     restart: always
-    image: tomassukenik/react-app:frontend-1.0
-    ports:
-      - "3000:80"
+    image: tomassukenik/react-app:frontend-1.1
     depends_on:
       - data-service
