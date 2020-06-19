@@ -42,6 +42,6 @@ services:
       - MSG_QUEUE_NAME=heroDetailQueue
   frontend:
     restart: always
-    image: tomassukenik/react-app:frontend-1.1
+    image: tomassukenik/react-app:frontend-1.2.1
     depends_on:
       - data-service
